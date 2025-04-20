@@ -141,8 +141,6 @@ const ComparisonChart: React.FC<ComparisonChartProps> = ({ data, selectedMetrics
               }
             ]}
             animate={true}
-            // motionStiffness={90}
-            // motionDamping={15}
           />
         ) : (
           <Box 

@@ -118,8 +118,6 @@ const BarChartView: React.FC<BarChartViewProps> = ({
               },
             ]}
             animate={true}
-            // motionStiffness={90}
-            // motionDamping={15}
           />
         ) : (
           <Box

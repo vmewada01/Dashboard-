@@ -74,6 +74,8 @@ const Dashboard: React.FC = () => {
     setCurrentUser(user);
   };
 
+  console.log(currentUser, "current user")
+
   return (
     <Box
       sx={{

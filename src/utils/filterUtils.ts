@@ -54,7 +54,6 @@ export const groupDataByAttributes = (
   
   data.forEach(item => {
     const attributeValues = groupingAttributes.map(attr => item[attr]).join('-');
-    const attributeLabels = groupingAttributes.map(attr => item[attr]).join(', ');
     
     if (!groupedData.has(attributeValues)) {
       groupedData.set(attributeValues, []);

@@ -50,15 +50,14 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
         })),
       };
     })
-    .filter(Boolean); // remove null entries
+    .filter(Boolean);
 
   const hasData =
+    Array.isArray(chartData) &&
     chartData.length > 0 &&
-    chartData.some((series: any) => series?.data?.length > 0);
-
-  if (!data) {
-    return <Typography>No data available.</Typography>;
-  }
+    chartData.some(
+      (series: any) => Array.isArray(series?.data) && series.data.length > 0
+    );
 
   return (
     <Paper
@@ -78,92 +77,17 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
         {title}
       </Typography>
 
-      <Box sx={{ height: 320 }}>
-        {/* {hasData ? (
-          <ResponsiveLine
-            data={chartData}
-            margin={{ top: 20, right: 110, bottom: 50, left: 60 }}
-            xScale={{ type: "time", format: "%Y-%m-%d", useUTC: false }}
-            xFormat="time:%Y-%m-%d"
-            yScale={{
-              type: "linear",
-              min: "auto",
-              max: "auto",
-              stacked: false,
-              reverse: false,
-            }}
-            axisBottom={{
-              format: "%b %d",
-              tickValues: "every 2 weeks",
-              legend: "Date",
-              legendOffset: 36,
-              legendPosition: "middle",
-              truncateTickAt: 0,
-            }}
-            axisLeft={{
-              legend: "Amount",
-              legendOffset: -40,
-              legendPosition: "middle",
-              format: (value) =>
-                `$${
-                  Math.abs(value) >= 1000
-                    ? `${
-                        Math.sign(value) * Math.floor(Math.abs(value) / 1000)
-                      }k`
-                    : Math.sign(value) * Math.abs(value)
-                }`,
-            }}
-            enablePoints={false}
-            enableSlices="x"
-            pointSize={10}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: "serieColor" }}
-            pointLabelYOffset={-12}
-            useMesh={true}
-            legends={[
-              {
-                anchor: "bottom-right",
-                direction: "column",
-                justify: false,
-                translateX: 100,
-                translateY: 0,
-                itemsSpacing: 0,
-                itemDirection: "left-to-right",
-                itemWidth: 80,
-                itemHeight: 20,
-                itemOpacity: 0.75,
-                symbolSize: 12,
-                symbolShape: "circle",
-                symbolBorderColor: "rgba(0, 0, 0, .5)",
-                effects: [
-                  {
-                    on: "hover",
-                    style: {
-                      itemBackground: "rgba(0, 0, 0, .03)",
-                      itemOpacity: 1,
-                    },
-                  },
-                ],
-              },
-            ]}
-            animate={true}
-            motionConfig="gentle"
-          />
-        ) : ( */}
-        <Box
-          sx={{
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography variant="body2" color="text.secondary">
-            No data available for the selected filters
-          </Typography>
-        </Box>
-        {/* )} */}
+      <Box
+        sx={{
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="body2" color="text.secondary">
+          No data available for the selected filters
+        </Typography>
       </Box>
     </Paper>
   );

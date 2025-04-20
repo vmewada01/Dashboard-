@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Typography, Box, useTheme } from "@mui/material";
+import { Paper, Typography, Box } from "@mui/material";
 import { MetricType } from "../types/data";
 
 interface TimeSeriesChartProps {
@@ -9,55 +9,9 @@ interface TimeSeriesChartProps {
 }
 
 const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
-  data,
-  selectedMetrics,
   title,
 }) => {
-  const theme = useTheme();
 
-  const metricsToDisplay =
-    Array.isArray(selectedMetrics) && selectedMetrics.length > 0
-      ? selectedMetrics
-      : ["mySpend", "sameStoreSpend", "newStoreSpend", "lostStoreSpend"];
-
-  const metricLabels: Record<MetricType, string> = {
-    mySpend: "My Spend",
-    sameStoreSpend: "Same Store Spend",
-    newStoreSpend: "New Store Spend",
-    lostStoreSpend: "Lost Store Spend",
-  };
-
-  const colors = [
-    theme.palette.primary.main,
-    theme.palette.secondary.main,
-    theme.palette.success.main,
-    theme.palette.error.main,
-  ];
-
-  const chartData: any = metricsToDisplay
-    .map((metric, index) => {
-      const metricData = data?.[metric];
-
-      // Defensive check: skip if data is not present or not an array
-      if (!Array.isArray(metricData) || metricData.length === 0) return null;
-
-      return {
-        id: (metricLabels as any)[metric],
-        color: colors[index % colors.length],
-        data: metricData.map((point: any) => ({
-          x: point.date,
-          y: point.value,
-        })),
-      };
-    })
-    .filter(Boolean);
-
-  const hasData =
-    Array.isArray(chartData) &&
-    chartData.length > 0 &&
-    chartData.some(
-      (series: any) => Array.isArray(series?.data) && series.data.length > 0
-    );
 
   return (
     <Paper

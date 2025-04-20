@@ -42,6 +42,7 @@ const DataTable: React.FC<DataTableProps> = ({ data, selectedMetrics }) => {
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
+    console.log(event)
     setPage(newPage);
   };
 
@@ -62,7 +63,7 @@ const DataTable: React.FC<DataTableProps> = ({ data, selectedMetrics }) => {
 
   const createSortHandler =
     (metric: MetricType, property: string) =>
-    (event: React.MouseEvent<unknown>) => {
+    () => {
       handleRequestSort(metric, property);
     };
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
-  Paper,
   Tabs,
   Tab,
   AppBar,
@@ -16,7 +15,7 @@ import {
   getAllCategories,
   timeSeriesData,
 } from "../data/mockData";
-import { User, FilterState, DataItem, TableData } from "../types/data";
+import { User, FilterState, TableData } from "../types/data";
 import { filterData, groupDataByAttributes } from "../utils/filterUtils";
 import { BarChart, LineChart } from "lucide-react";
 import DataTable from "./DataTable";
@@ -67,6 +66,7 @@ const Dashboard: React.FC = () => {
   }, [currentUser, filters]);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    console.log(event)
     setCurrentTab(newValue);
   };
 
